@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="./css/main.css"> 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Posts</title>
+    </head>
+    <body>
+        <div id="conteudo">
+            <table>
+                <thead>
+                    <tr>
+                        <th>UserId  ID &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Title</th>
+                        <th style="text-align:left">Body</th>
+                    </tr>
+                </thead>
+           </table>
+        </div>
+        <script>
+            function getPosts (){
+                fetch('https://jsonplaceholder.typicode.com/posts')
+                .then(response => response.json())
+                .then((json) => {
+                    const table = document.createElement('table');
+                    const tableBody = document.createElement('tbody');
+                    table.appendChild(tableBody);
+                    json.forEach((item) => {
+                        const row = document.createElement('tr');
+                        for (key in item) {
+                            const cell = document.createElement('td');
+                            cell.appendChild(document.createTextNode(item[key]));
+                            row.appendChild(cell);
+                        }
+                        tableBody.appendChild(row);
+                    });
+                    document.getElementById("conteudo").appendChild(table);
+                })
+            }
+            document.getElementById("conteudo").appendChild(getPosts());
+        </script>
+                <nav class="nav">
+                    <li class="nav-item"><a href="albuns.html" title="Albuns">Albuns</a></li>
+                    <li class="nav-item"><a href="menu.html" title="Menu">Menu</a></li>
+                    <li class="nav-item"><a href="todos.html" title="Todos">To-dos</a></li>
+                </nav>
+    </body>
+</html>
